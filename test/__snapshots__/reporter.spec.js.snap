@@ -1,0 +1,133 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`reporter error allows decorating an error with a code or name 1`] = `
+"● Compiling...
+✖ Compilation failed
+
+500: Error message
+
+
+"
+`;
+
+exports[`reporter error allows decorating an error with a code or name 2`] = `
+"✖ Compilation failed
+
+Syntax error: Error message
+
+
+"
+`;
+
+exports[`reporter error allows hiding the stats from the output 1`] = `
+"● Compiling...
+✖ Compilation failed
+
+Error message
+
+
+"
+`;
+
+exports[`reporter error renders the correct output 1`] = `
+"● Compiling...
+✖ Compilation failed
+
+Error message
+- file1.js:1 method1
+    /path/to/file1.js:1:0
+  - file2.js:1 method2
+    /path/to/file2.js:1:0
+
+"
+`;
+
+exports[`reporter stopReporting does not output anymore after calling stopReporting 1`] = `
+"● Compiling...
+✔ Compilation succeeded (100ms)
+
+Asset    Size
+foo.js   10Kb
+
+"
+`;
+
+exports[`reporter success allows displaying stats only on the first compilation 1`] = `
+"● Compiling...
+✔ Compilation succeeded (100ms)
+
+Asset    Size
+foo.js   10Kb
+
+● Compiling...
+✔ Compilation succeeded (100ms)
+
+● Compiling...
+✔ Compilation succeeded (100ms)
+
+● Compiling...
+✔ Compilation succeeded (100ms)
+
+"
+`;
+
+exports[`reporter success allows hiding the stats from the output 1`] = `
+"● Compiling...
+✔ Compilation succeeded (100ms)
+
+"
+`;
+
+exports[`reporter success renders the correct output 1`] = `
+"● Compiling...
+✔ Compilation succeeded (100ms)
+
+Asset    Size
+foo.js   10Kb
+
+"
+`;
+
+exports[`reporter success resets the displayStats logic when a run finishes 1`] = `
+"● Compiling...
+✔ Compilation succeeded (100ms)
+
+Asset    Size
+foo.js   10Kb
+
+● Compiling...
+✔ Compilation succeeded (100ms)
+
+● Compiling...
+✔ Compilation succeeded (100ms)
+
+Asset    Size
+foo.js   10Kb
+
+● Compiling...
+✔ Compilation succeeded (100ms)
+
+"
+`;
+
+exports[`reporter success resets the displayStats logic when an unwatch is called 1`] = `
+"● Compiling...
+✔ Compilation succeeded (100ms)
+
+Asset    Size
+foo.js   10Kb
+
+● Compiling...
+✔ Compilation succeeded (100ms)
+
+● Compiling...
+✔ Compilation succeeded (100ms)
+
+Asset    Size
+foo.js   10Kb
+
+● Compiling...
+✔ Compilation succeeded (100ms)
+
+"
+`;

@@ -1,0 +1,80 @@
+{
+  "name": "webpack-sane-compiler-reporter",
+  "version": "0.1.0",
+  "description": "Pretty reporting for webpack-sane-compiler",
+  "keywords": [
+    "webpack",
+    "compiler",
+    "compilation",
+    "report",
+    "reporter",
+    "reporting"
+  ],
+  "author": "André Cruz <andre@moxy.studio>",
+  "license": "MIT",
+  "bugs": "https://github.com/moxystudio/webpack-sane-compiler-reporter/issues",
+  "homepage": "https://github.com/moxystudio/webpack-sane-compiler-reporter",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:moxystudio/webpack-sane-compiler-reporter"
+  },
+  "main": "index.js",
+  "files": [
+    "lib"
+  ],
+  "scripts": {
+    "lint": "eslint .",
+    "test": "jest --env node --coverage",
+    "prerelease": "npm t && npm run lint",
+    "release": "standard-version",
+    "precommit": "lint-staged",
+    "commitmsg": "commitlint -e $GIT_PARAMS"
+  },
+  "standard-version": {
+    "scripts": {
+      "posttag": "git push --follow-tags origin master && npm publish"
+    }
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint --fix",
+      "git add"
+    ]
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-angular"
+    ]
+  },
+  "peerDependencies": {
+    "webpack-sane-compiler": "^1.0.0",
+    "webpack": ">=2.0.0 <4.0.0"
+  },
+  "dependencies": {
+    "chalk": "^2.3.0",
+    "figures": "^2.0.0",
+    "lodash.wrap": "^4.1.1",
+    "p-finally": "^1.0.0",
+    "pretty-error": "^2.1.1"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^5.2.5",
+    "@commitlint/config-angular": "^4.3.0",
+    "eslint": "^4.13.1",
+    "eslint-config-moxy": "^4.1.2",
+    "husky": "^0.14.3",
+    "jest": "^21.2.1",
+    "lint-staged": "^6.0.0",
+    "standard-version": "^4.2.0",
+    "strip-ansi": "^4.0.0"
+  },
+  "jest": {
+    "modulePathIgnorePatterns": [
+      "test/tmp/",
+      "test/configs/"
+    ],
+    "coveragePathIgnorePatterns": [
+      "test/"
+    ]
+  }
+}
