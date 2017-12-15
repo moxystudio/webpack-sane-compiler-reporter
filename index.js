@@ -58,7 +58,10 @@ function startReporting(compiler, options) {
     options.printSuccess && compiler.on('end', onEnd);
     options.printError && compiler.on('error', onError);
 
-    return stopReporting;
+    return {
+        stop: stopReporting,
+        options,
+    };
 }
 
 module.exports = startReporting;
