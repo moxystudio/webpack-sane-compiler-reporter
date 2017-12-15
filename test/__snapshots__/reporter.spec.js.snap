@@ -42,7 +42,7 @@ Error message
 "
 `;
 
-exports[`reporter stopReporting does not output anymore after calling stopReporting 1`] = `
+exports[`reporter returned object does not output anymore after calling stop 1`] = `
 "● Compiling...
 ✔ Compilation succeeded (100ms)
 
@@ -50,6 +50,18 @@ Asset    Size
 foo.js   10Kb
 
 "
+`;
+
+exports[`reporter returned object should provide the internal options 1`] = `
+Object {
+  "printError": [Function],
+  "printFailure": [Function],
+  "printStart": [Function],
+  "printStats": [Function],
+  "printSuccess": [Function],
+  "stats": false,
+  "write": [Function],
+}
 `;
 
 exports[`reporter success allows displaying stats only on the first compilation 1`] = `

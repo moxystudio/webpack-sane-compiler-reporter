@@ -166,23 +166,31 @@ describe('reporter', () => {
         });
     });
 
-    describe('stopReporting', () => {
-        it('does not output anymore after calling stopReporting', () => {
+    describe('returned object', () => {
+        it('does not output anymore after calling stop', () => {
             const compiler = createCompiler();
             const writter = createWritter();
             const stats = createStats();
 
-            const stopReporting = createReporter(compiler, { write: writter });
+            const { stop } = createReporter(compiler, { write: writter });
 
             compiler.emit('begin');
             compiler.emit('end', stats);
 
-            stopReporting();
+            stop();
 
             compiler.emit('begin');
             compiler.emit('end', stats);
 
             expect(writter.getOutput()).toMatchSnapshot();
+        });
+
+        it('should provide the internal options', () => {
+            const compiler = createCompiler();
+
+            const { options } = createReporter(compiler, { stats: false });
+
+            expect(options).toMatchSnapshot();
         });
     });
 });

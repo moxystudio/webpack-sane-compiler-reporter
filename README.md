@@ -30,12 +30,12 @@ Beautiful reporting for [webpack-sane-compiler](https://github.com/moxystudio/we
 ```js
 const startReporting = require('webpack-sane-compiler-reporter');
 
-const stopReporting = startReporting(compiler, {/* options */});
+const { stop, options } = startReporting(compiler, {/* options */});
 
-// Call compiler.run() or compiler.watch() to start a compilation and start outputting reports
-// Additionally, calling stopReporting() will stop listening to the compiler events
+// Now, just call compiler.run() or compiler.watch() to start a compilation and start outputting reports
+// Calling stop() will stop listening to the compiler events
+// Furthermore, you have access to the options that were computed by the merge of provided options and the defaults
 ```
-
 
 ### Available options:
 
@@ -70,7 +70,7 @@ reporter(compiler, {
 
 ## Tests
 
-`$ npm test`
+`$ npm test`   
 `$ npm test -- --watch` during development
 
 
