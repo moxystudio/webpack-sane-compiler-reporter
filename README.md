@@ -43,11 +43,11 @@ const stopReporting = startReporting(compiler, {/* options */});
 | ------ | ------------- | -------- | ------- |
 | stats | Display webpack stats after each compilation | boolean/string (`true`, `false` or `'once'`) | `true` |
 | write | Callback responsible for printing/outputting the generated report messages | function | Prints to `stderr` |
-| [printStart](add_permalink_here) | Callback that generates a report message for when a compilation starts | function | ![Example output](images/start.png) |
-| [printSuccess](add_permalink_here) | Callback that generates a report message for when a compilation succeeds | function | ![Example output](images/success.png) |
-| [printStats](add_permalink_here) | Error that generates a string representation of a WebpackStats instance | function | ![Example output](images/stats.png) |
-| [printFailure](add_permalink_here) | Callback that generates a report message for when a compilation fails | function | ![Example output](images/failure.png) |
-| [printError](add_permalink_here) | Callback that generates a string representation of an error | function | ![Example output](images/error.png) |
+| [printStart](https://github.com/moxystudio/webpack-sane-compiler-reporter/commit/a2e035470c0418d8d375e777c8e153cbedf7034c#diff-168726dbe96b3ce427e7fedce31bb0bcR16) | Callback that generates a report message for when a compilation starts | function | ![Example output](images/start.png) |
+| [printSuccess](https://github.com/moxystudio/webpack-sane-compiler-reporter/commit/a2e035470c0418d8d375e777c8e153cbedf7034c#diff-168726dbe96b3ce427e7fedce31bb0bcR17) | Callback that generates a report message for when a compilation succeeds | function | ![Example output](images/success.png) |
+| [printStats](https://github.com/moxystudio/webpack-sane-compiler-reporter/commit/a2e035470c0418d8d375e777c8e153cbedf7034c#diff-168726dbe96b3ce427e7fedce31bb0bcR20) | Error that generates a string representation of a WebpackStats instance | function | ![Example output](images/stats.png) |
+| [printFailure](https://github.com/moxystudio/webpack-sane-compiler-reporter/commit/a2e035470c0418d8d375e777c8e153cbedf7034c#diff-168726dbe96b3ce427e7fedce31bb0bcR18) | Callback that generates a report message for when a compilation fails | function | ![Example output](images/failure.png) |
+| [printError](https://github.com/moxystudio/webpack-sane-compiler-reporter/commit/a2e035470c0418d8d375e777c8e153cbedf7034c#diff-168726dbe96b3ce427e7fedce31bb0bcR19) | Callback that generates a string representation of an error | function | ![Example output](images/error.png) |
 
 
 ### API
