@@ -13,32 +13,35 @@ function startReporting(compiler, options) {
 
         write: (str) => str && process.stderr.write(str),
 
-        printStart: (renderStart, ...rest) => `${renderStart(...rest)}\n`,
-        printSuccess: (renderSuccess, ...rest) => `${renderSuccess(...rest)}\n\n`,
-        printFailure: (renderFailure, ...rest) => `${renderFailure(...rest)}\n\n`,
-        printError: (renderError, ...rest) => `${renderError(...rest)}\n\n`,
-        printStats: (renderStats, ...rest) => `${renderStats(...rest)}\n\n`,
+        /* eslint-disable handle-callback-err, no-unused-vars */
+        printStart: () => `${renderers.start()}\n`,
+        printSuccess: (stats) => `${renderers.success(stats.endTime - stats.startTime)}\n\n`,
+        printFailure: (err) => `${renderers.failure()}\n\n`,
+        printError: (err) => `${renderers.error(err)}\n\n`,
+        printStats: (stats) => `${renderers.stats(stats)}\n\n`,
+        /* eslint-enable handle-callback-err, no-unused-vars */
+
     }, options);
 
     const resetDisplayStats = () => (displayStats = options.stats === true || options.stats === 'once');
     const didPrintStats = () => (displayStats = options.stats === 'once' ? false : displayStats);
     const write = (str) => options.write && options.write(str);
 
-    const onBegin = () => write(options.printStart(renderers.start, { renderers }));
+    const onBegin = () => write(options.printStart());
 
     const onEnd = (stats) => {
-        write(options.printSuccess(renderers.success, stats.endTime - stats.startTime, { renderers }));
+        write(options.printSuccess(stats));
 
         if (displayStats) {
-            write(options.printStats(renderers.stats, stats, { renderers }));
+            write(options.printStats(stats));
 
             didPrintStats();
         }
     };
 
     const onError = (err) => {
-        write(options.printFailure(renderers.failure, { renderers }));
-        write(options.printError(renderers.error, err, { renderers }));
+        write(options.printFailure(err));
+        write(options.printError(err));
     };
 
     const stopReporting = () => {
@@ -54,9 +57,9 @@ function startReporting(compiler, options) {
         compiler[method] = wrap(compiler[method], (fn, ...args) => pFinally(fn(...args), resetDisplayStats));
     });
 
-    options.printStart && compiler.on('begin', onBegin);
-    options.printSuccess && compiler.on('end', onEnd);
-    options.printError && compiler.on('error', onError);
+    compiler.on('begin', onBegin);
+    compiler.on('end', onEnd);
+    compiler.on('error', onError);
 
     return {
         stop: stopReporting,

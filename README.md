@@ -52,7 +52,7 @@ const { stop, options } = startReporting(compiler, {/* options */});
 
 ### API
 
-As shown in the [usage](#usage) section abose, the result of adding reporting on a compiler is a function that, when invoked, stops listening to the compiler events, hence halting any further output.
+As shown in the [usage](#usage) section above, the result of adding reporting on a compiler is a function that, when invoked, stops listening to the compiler events, hence halting any further output.
 
 ### Other exports
 
@@ -62,7 +62,7 @@ For convenience (or fun) this package also exports the default render methods:
 const reporter = require('webpack-sane-compiler-reporter');
 
 reporter(compiler, {
-    printSuccess: () => reporter.renderers.renderError(new Error('Nope!')), // ¯\_(ツ)_/¯
+    printSuccess: (stats) => reporter.renderers.renderSuccess(stats),
 });
 
 ```
