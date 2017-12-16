@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="3.0.0"></a>
+# [3.0.0](https://github.com/moxystudio/webpack-sane-compiler-reporter/compare/v2.0.0...v3.0.0) (2017-12-16)
+
+
+### Features
+
+* indent stats and error ([ce3505e](https://github.com/moxystudio/webpack-sane-compiler-reporter/commit/ce3505e))
+* pass stats and err to print success and print failure respectively ([bc2409b](https://github.com/moxystudio/webpack-sane-compiler-reporter/commit/bc2409b))
+
+
+### BREAKING CHANGES
+
+* the printers signature is different
+
+
+
 <a name="2.0.0"></a>
 # [2.0.0](https://github.com/moxystudio/webpack-sane-compiler-reporter/compare/v1.0.0...v2.0.0) (2017-12-15)
 
