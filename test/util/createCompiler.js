@@ -2,7 +2,7 @@
 
 const EventEmitter = require('events');
 
-module.exports = function (overrides = {}) {
+module.exports = (overrides = {}) => {
     const emiter = new EventEmitter();
 
     return Object.assign(emiter, {

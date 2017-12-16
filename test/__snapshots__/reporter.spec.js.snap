@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`reporter failed build allows decorating an error with a code or name 1`] = `
+exports[`failed build allows decorating an error with a code or name 1`] = `
 "● Compiling...
 ✖ Compilation failed
 
@@ -10,7 +10,7 @@ exports[`reporter failed build allows decorating an error with a code or name 1`
 "
 `;
 
-exports[`reporter failed build allows decorating an error with a code or name 2`] = `
+exports[`failed build allows decorating an error with a code or name 2`] = `
 "✖ Compilation failed
 
     Syntax error: Error message
@@ -19,7 +19,7 @@ exports[`reporter failed build allows decorating an error with a code or name 2`
 "
 `;
 
-exports[`reporter failed build allows hiding the stats from the output 1`] = `
+exports[`failed build allows hiding the stats from the output 1`] = `
 "● Compiling...
 ✖ Compilation failed
 
@@ -29,7 +29,7 @@ exports[`reporter failed build allows hiding the stats from the output 1`] = `
 "
 `;
 
-exports[`reporter failed build renders the correct output 1`] = `
+exports[`failed build renders the correct output 1`] = `
 "● Compiling...
 ✖ Compilation failed
 
@@ -42,7 +42,7 @@ exports[`reporter failed build renders the correct output 1`] = `
 "
 `;
 
-exports[`reporter printers should allow overriding the various print options 1`] = `
+exports[`printers should allow overriding the various print options 1`] = `
 "start
 success
 stats
@@ -52,7 +52,7 @@ err
 "
 `;
 
-exports[`reporter returned object should provide the internal options 1`] = `
+exports[`returned object should provide the internal options 1`] = `
 Object {
   "printError": [Function],
   "printFailure": [Function],
@@ -64,7 +64,7 @@ Object {
 }
 `;
 
-exports[`reporter returned object should stop reporting if stop is called 1`] = `
+exports[`returned object should stop reporting if stop is called 1`] = `
 "● Compiling...
 ✔ Compilation succeeded (100ms)
 
@@ -74,43 +74,7 @@ exports[`reporter returned object should stop reporting if stop is called 1`] = 
 "
 `;
 
-exports[`reporter successful build should display stats only on the first compilation if \`options.stats\` is once 1`] = `
-"● Compiling...
-✔ Compilation succeeded (100ms)
-
-    Asset    Size
-    foo.js   10Kb
-
-● Compiling...
-✔ Compilation succeeded (100ms)
-
-● Compiling...
-✔ Compilation succeeded (100ms)
-
-● Compiling...
-✔ Compilation succeeded (100ms)
-
-"
-`;
-
-exports[`reporter successful build should hide the stats from the output if \`options.stats\` is false 1`] = `
-"● Compiling...
-✔ Compilation succeeded (100ms)
-
-"
-`;
-
-exports[`reporter successful build should render the correct output 1`] = `
-"● Compiling...
-✔ Compilation succeeded (100ms)
-
-    Asset    Size
-    foo.js   10Kb
-
-"
-`;
-
-exports[`reporter successful build should reset the displayStats logic when a run finishes 1`] = `
+exports[`successful build should display stats only on the first compilation if \`options.stats\` is once 1`] = `
 "● Compiling...
 ✔ Compilation succeeded (100ms)
 
@@ -123,6 +87,42 @@ exports[`reporter successful build should reset the displayStats logic when a ru
 ● Compiling...
 ✔ Compilation succeeded (100ms)
 
+● Compiling...
+✔ Compilation succeeded (100ms)
+
+"
+`;
+
+exports[`successful build should hide the stats from the output if \`options.stats\` is false 1`] = `
+"● Compiling...
+✔ Compilation succeeded (100ms)
+
+"
+`;
+
+exports[`successful build should render the correct output 1`] = `
+"● Compiling...
+✔ Compilation succeeded (100ms)
+
+    Asset    Size
+    foo.js   10Kb
+
+"
+`;
+
+exports[`successful build should reset the displayStats logic when a run finishes 1`] = `
+"● Compiling...
+✔ Compilation succeeded (100ms)
+
+    Asset    Size
+    foo.js   10Kb
+
+● Compiling...
+✔ Compilation succeeded (100ms)
+
+● Compiling...
+✔ Compilation succeeded (100ms)
+
     Asset    Size
     foo.js   10Kb
 
@@ -132,7 +132,7 @@ exports[`reporter successful build should reset the displayStats logic when a ru
 "
 `;
 
-exports[`reporter successful build should reset the displayStats logic when an unwatch is called 1`] = `
+exports[`successful build should reset the displayStats logic when an unwatch is called 1`] = `
 "● Compiling...
 ✔ Compilation succeeded (100ms)
 

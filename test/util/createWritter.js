@@ -2,7 +2,7 @@
 
 const stripAnsi = require('strip-ansi');
 
-module.exports = function () {
+module.exports = () => {
     let output = '';
 
     function write(str) {
