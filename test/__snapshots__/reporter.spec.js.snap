@@ -4,7 +4,7 @@ exports[`reporter failed build allows decorating an error with a code or name 1`
 "● Compiling...
 ✖ Compilation failed
 
-500: Error message
+    500: Error message
 
 
 "
@@ -13,7 +13,7 @@ exports[`reporter failed build allows decorating an error with a code or name 1`
 exports[`reporter failed build allows decorating an error with a code or name 2`] = `
 "✖ Compilation failed
 
-Syntax error: Error message
+    Syntax error: Error message
 
 
 "
@@ -23,7 +23,7 @@ exports[`reporter failed build allows hiding the stats from the output 1`] = `
 "● Compiling...
 ✖ Compilation failed
 
-Error message
+    Error message
 
 
 "
@@ -33,11 +33,11 @@ exports[`reporter failed build renders the correct output 1`] = `
 "● Compiling...
 ✖ Compilation failed
 
-Error message
-- file1.js:1 method1
-    /path/to/file1.js:1:0
-  - file2.js:1 method2
-    /path/to/file2.js:1:0
+    Error message
+    - file1.js:1 method1
+        /path/to/file1.js:1:0
+      - file2.js:1 method2
+        /path/to/file2.js:1:0
 
 "
 `;
@@ -68,8 +68,8 @@ exports[`reporter returned object should stop reporting if stop is called 1`] = 
 "● Compiling...
 ✔ Compilation succeeded (100ms)
 
-Asset    Size
-foo.js   10Kb
+    Asset    Size
+    foo.js   10Kb
 
 "
 `;
@@ -78,8 +78,8 @@ exports[`reporter successful build should display stats only on the first compil
 "● Compiling...
 ✔ Compilation succeeded (100ms)
 
-Asset    Size
-foo.js   10Kb
+    Asset    Size
+    foo.js   10Kb
 
 ● Compiling...
 ✔ Compilation succeeded (100ms)
@@ -104,8 +104,8 @@ exports[`reporter successful build should render the correct output 1`] = `
 "● Compiling...
 ✔ Compilation succeeded (100ms)
 
-Asset    Size
-foo.js   10Kb
+    Asset    Size
+    foo.js   10Kb
 
 "
 `;
@@ -114,8 +114,8 @@ exports[`reporter successful build should reset the displayStats logic when a ru
 "● Compiling...
 ✔ Compilation succeeded (100ms)
 
-Asset    Size
-foo.js   10Kb
+    Asset    Size
+    foo.js   10Kb
 
 ● Compiling...
 ✔ Compilation succeeded (100ms)
@@ -123,8 +123,8 @@ foo.js   10Kb
 ● Compiling...
 ✔ Compilation succeeded (100ms)
 
-Asset    Size
-foo.js   10Kb
+    Asset    Size
+    foo.js   10Kb
 
 ● Compiling...
 ✔ Compilation succeeded (100ms)
@@ -136,8 +136,8 @@ exports[`reporter successful build should reset the displayStats logic when an u
 "● Compiling...
 ✔ Compilation succeeded (100ms)
 
-Asset    Size
-foo.js   10Kb
+    Asset    Size
+    foo.js   10Kb
 
 ● Compiling...
 ✔ Compilation succeeded (100ms)
@@ -145,8 +145,8 @@ foo.js   10Kb
 ● Compiling...
 ✔ Compilation succeeded (100ms)
 
-Asset    Size
-foo.js   10Kb
+    Asset    Size
+    foo.js   10Kb
 
 ● Compiling...
 ✔ Compilation succeeded (100ms)

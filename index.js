@@ -2,6 +2,7 @@
 
 const pFinally = require('p-finally');
 const wrap = require('lodash.wrap');
+const indentString = require('indent-string');
 
 const renderers = require('./lib/renderers');
 
@@ -17,8 +18,8 @@ function startReporting(compiler, options) {
         printStart: () => `${renderers.start()}\n`,
         printSuccess: (stats) => `${renderers.success(stats.endTime - stats.startTime)}\n\n`,
         printFailure: (err) => `${renderers.failure()}\n\n`,
-        printError: (err) => `${renderers.error(err)}\n\n`,
-        printStats: (stats) => `${renderers.stats(stats)}\n\n`,
+        printStats: (stats) => `${indentString(renderers.stats(stats), 4)}\n\n`,
+        printError: (err) => `${indentString(renderers.error(err), 4)}\n\n`,
         /* eslint-enable handle-callback-err, no-unused-vars */
 
     }, options);
