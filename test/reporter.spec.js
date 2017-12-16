@@ -8,7 +8,7 @@ const createWritter = require('./util/createWritter');
 describe('reporter', () => {
     beforeEach(jest.resetModules);
 
-    it('adds listeners to the begin, error and end events of the compiler', () => {
+    it('should add listeners to the begin, error and end events of the compiler', () => {
         const compiler = createCompiler();
         const expectedEvents = expect.arrayContaining(['begin', 'end', 'error']);
 
@@ -17,8 +17,8 @@ describe('reporter', () => {
         expect(compiler.eventNames()).toEqual(expectedEvents);
     });
 
-    describe('success', () => {
-        it('renders the correct output', () => {
+    describe('successful build', () => {
+        it('should render the correct output', () => {
             const compiler = createCompiler();
             const writter = createWritter();
             const stats = createStats();
@@ -31,7 +31,7 @@ describe('reporter', () => {
             expect(writter.getOutput()).toMatchSnapshot();
         });
 
-        it('allows hiding the stats from the output', () => {
+        it('should hide the stats from the output if `options.stats` is false', () => {
             const compiler = createCompiler();
             const writter = createWritter();
 
@@ -43,7 +43,7 @@ describe('reporter', () => {
             expect(writter.getOutput()).toMatchSnapshot();
         });
 
-        it('allows displaying stats only on the first compilation', () => {
+        it('should display stats only on the first compilation if `options.stats` is once', () => {
             const compiler = createCompiler();
             const writter = createWritter();
             const stats = createStats();
@@ -62,7 +62,7 @@ describe('reporter', () => {
             expect(writter.getOutput()).toMatchSnapshot();
         });
 
-        it('resets the displayStats logic when a run finishes', (done) => {
+        it('should reset the displayStats logic when a run finishes', (done) => {
             const stats = createStats();
             const writter = createWritter();
             const compiler = createCompiler({
@@ -88,7 +88,7 @@ describe('reporter', () => {
             });
         });
 
-        it('resets the displayStats logic when an unwatch is called', (done) => {
+        it('should reset the displayStats logic when an unwatch is called', (done) => {
             const stats = createStats();
             const writter = createWritter();
             const compiler = createCompiler({
@@ -115,7 +115,7 @@ describe('reporter', () => {
         });
     });
 
-    describe('error', () => {
+    describe('failed build', () => {
         it('renders the correct output', () => {
             const compiler = createCompiler();
             const writter = createWritter();
@@ -167,7 +167,7 @@ describe('reporter', () => {
     });
 
     describe('returned object', () => {
-        it('does not output anymore after calling stop', () => {
+        it('should stop reporting if stop is called', () => {
             const compiler = createCompiler();
             const writter = createWritter();
             const stats = createStats();
@@ -191,6 +191,69 @@ describe('reporter', () => {
             const { options } = createReporter(compiler, { stats: false });
 
             expect(options).toMatchSnapshot();
+        });
+    });
+
+    describe('printers', () => {
+        it('should allow overriding the various print options', () => {
+            const compiler = createCompiler();
+            const writter = createWritter();
+            const stats = createStats();
+
+            createReporter(compiler, {
+                printStart: () => 'start\n',
+                printSuccess: () => 'success\n',
+                printFailure: () => 'failure\n',
+                printStats: () => 'stats\n',
+                printError: () => 'err\n',
+
+                write: writter,
+            });
+
+            compiler.emit('begin');
+            compiler.emit('end', stats);
+            compiler.emit('begin');
+            compiler.emit('error', new Error('foo'));
+
+            expect(writter.getOutput()).toMatchSnapshot();
+        });
+
+        it('should call the printers with the correct arguments', () => {
+            const compiler = createCompiler();
+            const writter = createWritter();
+            const stats = createStats();
+
+            const printStart = () => '';
+            const printSuccess = (stats) => {
+                expect(stats).toHaveProperty('startTime');
+                expect(stats).toHaveProperty('endTime');
+
+                return '';
+            };
+            const printFailure = (err) => {
+                expect(err).toHaveProperty('message', 'foo');
+
+                return '';
+            };
+            const printStats = printSuccess;
+            const printError = printFailure;
+
+            createReporter(compiler, {
+                printStart,
+                printSuccess,
+                printFailure,
+                printStats,
+                printError,
+
+                write: writter,
+            });
+
+            expect.assertions(6);
+
+            compiler.emit('begin');
+            compiler.emit('end', stats);
+            compiler.emit('begin');
+            compiler.emit('error', new Error('foo'));
         });
     });
 });
