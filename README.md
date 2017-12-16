@@ -42,7 +42,7 @@ const { stop, options } = startReporting(compiler, {/* options */});
 
 | Name   | Description   | Type     | Default |
 | ------ | ------------- | -------- | ------- |
-| stats | Display webpack stats after each compilation | boolean/string (`true`, `false` or `'once'`) | `true` |
+| stats | Display webpack stats after each compilation | boolean/string (`true`, `false` or `'once'`) | true |
 | write | Callback responsible for printing/outputting the generated report messages | function | Prints to `stderr` |
 | [printStart](https://github.com/moxystudio/webpack-sane-compiler-reporter/blob/bf70f5cfd594219fd06ba81677b18ded34770df2/index.js#L18) | Callback that generates a report message for when a compilation starts | function | ![Example output](images/start.png) |
 | [printSuccess](https://github.com/moxystudio/webpack-sane-compiler-reporter/blob/bf70f5cfd594219fd06ba81677b18ded34770df2/index.js#L19) | Callback that generates a report message for when a compilation succeeds | function | ![Example output](images/success.png) |
