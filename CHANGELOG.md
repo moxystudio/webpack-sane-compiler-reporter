@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="3.0.1"></a>
+## [3.0.1](https://github.com/moxystudio/webpack-sane-compiler-reporter/compare/v3.0.0...v3.0.1) (2017-12-17)
+
+
+### Bug Fixes
+
+* do not print 0 duration if not passed ([f10a5b1](https://github.com/moxystudio/webpack-sane-compiler-reporter/commit/f10a5b1))
+
+
+
 <a name="3.0.0"></a>
 # [3.0.0](https://github.com/moxystudio/webpack-sane-compiler-reporter/compare/v2.0.0...v3.0.0) (2017-12-16)
 
