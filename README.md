@@ -63,7 +63,7 @@ For convenience this package also exports the [renderers](lib/renderers.js) used
 const reporter = require('webpack-sane-compiler-reporter');
 
 reporter(compiler, {
-    printSuccess: (stats) => reporter.renderers.renderSuccess(stats),
+    printSuccess: (stats) => `${reporter.renderers.renderSuccess(stats)}\n`,
 });
 ```
 
