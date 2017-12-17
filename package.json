@@ -69,10 +69,6 @@
     "strip-ansi": "^4.0.0"
   },
   "jest": {
-    "modulePathIgnorePatterns": [
-      "test/tmp/",
-      "test/configs/"
-    ],
     "coveragePathIgnorePatterns": [
       "test/"
     ]
