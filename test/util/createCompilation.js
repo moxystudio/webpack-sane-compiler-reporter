@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = () => ({
+module.exports = (overrides) => ({
     stats: {
         toString() {
             return [
@@ -13,4 +13,5 @@ module.exports = () => ({
         endTime: 100,
     },
     duration: 100,
+    ...overrides,
 });

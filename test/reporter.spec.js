@@ -143,6 +143,30 @@ describe('failed build', () => {
         compiler.emit('error', createError('Error message', { name: 'Syntax error' }));
         expect(writter.getOutput()).toMatchSnapshot();
     });
+
+    it('should render the error from the stats if present', () => {
+        const compiler = createCompiler();
+        const writter = createWritter();
+        const compilation = createCompilation({
+            stats: {
+                hasErrors: () => true,
+                toString: () => [
+                    'ERROR in ./src/App.js',
+                    'Module parse failed: Unexpected token (4:0)',
+                    'You may need an appropriate loader to handle this file type.',
+                    '',
+                    'console.log(\'Hello!\'',
+                ].join('\n'),
+            },
+        });
+
+        createReporter(compiler, { stats: true, write: writter });
+
+        compiler.emit('begin');
+        compiler.emit('error', createError('Error message', { stats: compilation.stats }));
+
+        expect(writter.getOutput()).toMatchSnapshot();
+    });
 });
 
 describe('returned object', () => {

@@ -38,6 +38,21 @@ exports[`failed build should render the correct output 1`] = `
 "
 `;
 
+exports[`failed build should render the error from the stats if present 1`] = `
+"● Compiling...
+✖ Compilation failed
+
+    Error message
+
+    ERROR in ./src/App.js
+    Module parse failed: Unexpected token (4:0)
+    You may need an appropriate loader to handle this file type.
+
+    console.log('Hello!'
+
+"
+`;
+
 exports[`printers should allow overriding the various print options 1`] = `
 "start
 success
