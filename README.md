@@ -35,25 +35,21 @@ const { stop, options } = startReporting(compiler, {/* options */});
 
 // Now, just call compiler.run() or compiler.watch() to start a compilation and start outputting reports
 // Calling stop() will stop listening to the compiler events
-// Furthermore, you have access to the options that were computed by the merge of provided options and the defaults
+// Furthermore, you have access to the options that were computed by the merge of provided options with the defaults
 ```
 
-### Available options:
+### Available options
 
 | Name   | Description   | Type     | Default |
 | ------ | ------------- | -------- | ------- |
 | stats | Display webpack stats after each compilation | boolean/string (`true`, `false` or `'once'`) | true |
 | write | Function responsible for printing/outputting the generated report messages | function | Prints to `stderr` |
-| [printStart](https://github.com/moxystudio/webpack-sane-compiler-reporter/blob/bf70f5cfd594219fd06ba81677b18ded34770df2/index.js#L18) | Function responsible for generating a message when a compilation starts | function | ![Example output](images/start.png) |
-| [printSuccess](https://github.com/moxystudio/webpack-sane-compiler-reporter/blob/bf70f5cfd594219fd06ba81677b18ded34770df2/index.js#L19) | Function responsible for generating a message when a compilation succeeds | function | ![Example output](images/success.png) |
-| [printFailure](https://github.com/moxystudio/webpack-sane-compiler-reporter/blob/bf70f5cfd594219fd06ba81677b18ded34770df2/index.js#L20)  |Function responsible for generating a message when a compilation fails | function | ![Example output](images/failure.png) |
-| [printStats](https://github.com/moxystudio/webpack-sane-compiler-reporter/blob/bf70f5cfd594219fd06ba81677b18ded34770df2/index.js#L21) | Function responsible for generating a message representing a WebpackStats instance | function | ![Example  output](images/stats.png) |
-| [printError](https://github.com/moxystudio/webpack-sane-compiler-reporter/blob/bf70f5cfd594219fd06ba81677b18ded34770df2/index.js#L22) | Function responsible for generating a message of a Error instance | function | ![Example output](images/error.png) |
+| [printStart](https://github.com/moxystudio/webpack-sane-compiler-reporter/blob/c12d3dbc362d34fed357a3141a4fa78bc8b760c6/index.js#L18) | Function responsible for generating a message when a compilation starts | function | ![Example output](images/start.png) |
+| [printSuccess](https://github.com/moxystudio/webpack-sane-compiler-reporter/blob/c12d3dbc362d34fed357a3141a4fa78bc8b760c6/index.js#L19) | Function responsible for generating a message when a compilation succeeds | function | ![Example output](images/success.png) |
+| [printFailure](https://github.com/moxystudio/webpack-sane-compiler-reporter/blob/c12d3dbc362d34fed357a3141a4fa78bc8b760c6/index.js#L20)  |Function responsible for generating a message when a compilation fails | function | ![Example output](images/failure.png) |
+| [printStats](https://github.com/moxystudio/webpack-sane-compiler-reporter/blob/c12d3dbc362d34fed357a3141a4fa78bc8b760c6/index.js#L21) | Function responsible for generating a message representing a WebpackStats instance | function | ![Example  output](images/stats.png) |
+| [printError](https://github.com/moxystudio/webpack-sane-compiler-reporter/blob/c12d3dbc362d34fed357a3141a4fa78bc8b760c6/index.js#L22) | Function responsible for generating a message of a Error instance | function | ![Example output](images/error.png) |
 
-
-### API
-
-As shown in the [usage](#usage) section above, the result of adding reporting on a compiler is a function that, when invoked, stops listening to the compiler events, hence halting any further output.
 
 ### Other exports
 
