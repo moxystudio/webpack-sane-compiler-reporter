@@ -2,8 +2,9 @@
 
 const createReporter = require('../');
 const createCompiler = require('./util/createCompiler');
-const createStats = require('./util/createStats');
+const createCompilation = require('./util/createCompilation');
 const createWritter = require('./util/createWritter');
+const createError = require('./util/createError');
 
 beforeEach(jest.resetModules);
 
@@ -20,12 +21,12 @@ describe('successful build', () => {
     it('should render the correct output', () => {
         const compiler = createCompiler();
         const writter = createWritter();
-        const stats = createStats();
+        const compilation = createCompilation();
 
         createReporter(compiler, { write: writter });
 
         compiler.emit('begin');
-        compiler.emit('end', stats);
+        compiler.emit('end', compilation);
 
         expect(writter.getOutput()).toMatchSnapshot();
     });
@@ -37,7 +38,7 @@ describe('successful build', () => {
         createReporter(compiler, { stats: false, write: writter });
 
         compiler.emit('begin');
-        compiler.emit('end', createStats());
+        compiler.emit('end', createCompilation());
 
         expect(writter.getOutput()).toMatchSnapshot();
     });
@@ -45,31 +46,31 @@ describe('successful build', () => {
     it('should display stats only on the first compilation if `options.stats` is once', () => {
         const compiler = createCompiler();
         const writter = createWritter();
-        const stats = createStats();
+        const compilation = createCompilation();
 
         createReporter(compiler, { stats: 'once', write: writter });
 
         compiler.emit('begin');
-        compiler.emit('end', stats);
+        compiler.emit('end', compilation);
         compiler.emit('begin');
-        compiler.emit('end', stats);
+        compiler.emit('end', compilation);
         compiler.emit('begin');
-        compiler.emit('end', stats);
+        compiler.emit('end', compilation);
         compiler.emit('begin');
-        compiler.emit('end', stats);
+        compiler.emit('end', compilation);
 
         expect(writter.getOutput()).toMatchSnapshot();
     });
 
     it('should reset the displayStats logic when a run finishes', (done) => {
-        const stats = createStats();
+        const compilation = createCompilation();
         const writter = createWritter();
         const compiler = createCompiler({
             run() {
                 compiler.emit('begin');
-                compiler.emit('end', stats);
+                compiler.emit('end', compilation);
                 compiler.emit('begin');
-                compiler.emit('end', stats);
+                compiler.emit('end', compilation);
 
                 return Promise.resolve();
             },
@@ -88,14 +89,14 @@ describe('successful build', () => {
     });
 
     it('should reset the displayStats logic when an unwatch is called', (done) => {
-        const stats = createStats();
+        const compilation = createCompilation();
         const writter = createWritter();
         const compiler = createCompiler({
             watch() {
                 compiler.emit('begin');
-                compiler.emit('end', stats);
+                compiler.emit('end', compilation);
                 compiler.emit('begin');
-                compiler.emit('end', stats);
+                compiler.emit('end', compilation);
             },
         });
 
@@ -115,17 +116,10 @@ describe('successful build', () => {
 });
 
 describe('failed build', () => {
-    it('renders the correct output', () => {
+    it('should render the correct output', () => {
         const compiler = createCompiler();
         const writter = createWritter();
-        const stats = createStats(true);
-        const error = Object.assign(new Error('Error message'), {
-            stats,
-            stack: [
-                'at method1 (/path/to/file1.js:1:0)',
-                'at method2 (/path/to/file2.js:1:0)',
-            ].join('\n'),
-        });
+        const error = createError();
 
         createReporter(compiler, { stats: 'once', write: writter });
 
@@ -135,32 +129,18 @@ describe('failed build', () => {
         expect(writter.getOutput()).toMatchSnapshot();
     });
 
-    it('allows hiding the stats from the output', () => {
+    it('should allow decorating an error with a code or name', () => {
         const compiler = createCompiler();
         const writter = createWritter();
-        const stats = createStats(true);
-
-        createReporter(compiler, { stats: false, write: writter });
-
-        compiler.emit('begin');
-        compiler.emit('error', Object.assign(new Error('Error message'), { stats, hideStack: true }));
-
-        expect(writter.getOutput()).toMatchSnapshot();
-    });
-
-    it('allows decorating an error with a code or name', () => {
-        const compiler = createCompiler();
-        const writter = createWritter();
-        const stats = createStats(true);
 
         createReporter(compiler, { stats: true, write: writter });
 
         compiler.emit('begin');
-        compiler.emit('error', Object.assign(new Error('Error message'), { stats, code: 500, hideStack: true }));
+        compiler.emit('error', createError('Error message', { code: 'foo' }));
         expect(writter.getOutput()).toMatchSnapshot();
 
         writter.reset();
-        compiler.emit('error', Object.assign(new Error('Error message'), { stats, name: 'Syntax error', hideStack: true }));
+        compiler.emit('error', createError('Error message', { name: 'Syntax error' }));
         expect(writter.getOutput()).toMatchSnapshot();
     });
 });
@@ -169,17 +149,17 @@ describe('returned object', () => {
     it('should stop reporting if stop is called', () => {
         const compiler = createCompiler();
         const writter = createWritter();
-        const stats = createStats();
+        const compilation = createCompilation();
 
         const { stop } = createReporter(compiler, { write: writter });
 
         compiler.emit('begin');
-        compiler.emit('end', stats);
+        compiler.emit('end', compilation);
 
         stop();
 
         compiler.emit('begin');
-        compiler.emit('end', stats);
+        compiler.emit('end', compilation);
 
         expect(writter.getOutput()).toMatchSnapshot();
     });
@@ -197,7 +177,7 @@ describe('printers', () => {
     it('should allow overriding the various print options', () => {
         const compiler = createCompiler();
         const writter = createWritter();
-        const stats = createStats();
+        const compilation = createCompilation();
 
         createReporter(compiler, {
             printStart: () => 'start\n',
@@ -210,9 +190,9 @@ describe('printers', () => {
         });
 
         compiler.emit('begin');
-        compiler.emit('end', stats);
+        compiler.emit('end', compilation);
         compiler.emit('begin');
-        compiler.emit('error', new Error('foo'));
+        compiler.emit('error', createError('foo'));
 
         expect(writter.getOutput()).toMatchSnapshot();
     });
@@ -220,12 +200,13 @@ describe('printers', () => {
     it('should call the printers with the correct arguments', () => {
         const compiler = createCompiler();
         const writter = createWritter();
-        const stats = createStats();
+        const compilation = createCompilation();
 
         const printStart = () => '';
-        const printSuccess = (stats) => {
+        const printSuccess = ({ stats, duration }) => {
             expect(stats).toHaveProperty('startTime');
             expect(stats).toHaveProperty('endTime');
+            expect(typeof duration).toBe('number');
 
             return '';
         };
@@ -247,10 +228,10 @@ describe('printers', () => {
             write: writter,
         });
 
-        expect.assertions(6);
+        expect.assertions(8);
 
         compiler.emit('begin');
-        compiler.emit('end', stats);
+        compiler.emit('end', compilation);
         compiler.emit('begin');
         compiler.emit('error', new Error('foo'));
     });

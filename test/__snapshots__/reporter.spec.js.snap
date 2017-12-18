@@ -1,35 +1,31 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`failed build allows decorating an error with a code or name 1`] = `
+exports[`failed build should allow decorating an error with a code or name 1`] = `
 "● Compiling...
 ✖ Compilation failed
 
-    500: Error message
-
+    foo: Error message
+    - file1.js:1 method1
+        /path/to/file1.js:1:0
+      - file2.js:1 method2
+        /path/to/file2.js:1:0
 
 "
 `;
 
-exports[`failed build allows decorating an error with a code or name 2`] = `
+exports[`failed build should allow decorating an error with a code or name 2`] = `
 "✖ Compilation failed
 
     Syntax error: Error message
-
-
-"
-`;
-
-exports[`failed build allows hiding the stats from the output 1`] = `
-"● Compiling...
-✖ Compilation failed
-
-    Error message
-
+    - file1.js:1 method1
+        /path/to/file1.js:1:0
+      - file2.js:1 method2
+        /path/to/file2.js:1:0
 
 "
 `;
 
-exports[`failed build renders the correct output 1`] = `
+exports[`failed build should render the correct output 1`] = `
 "● Compiling...
 ✖ Compilation failed
 

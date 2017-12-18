@@ -16,9 +16,9 @@ function startReporting(compiler, options) {
 
         /* eslint-disable handle-callback-err, no-unused-vars */
         printStart: () => `${renderers.start()}\n`,
-        printSuccess: (stats) => `${renderers.success(stats.endTime - stats.startTime)}\n\n`,
+        printSuccess: ({ duration }) => `${renderers.success(duration)}\n\n`,
         printFailure: (err) => `${renderers.failure()}\n\n`,
-        printStats: (stats) => `${indentString(renderers.stats(stats), 4)}\n\n`,
+        printStats: ({ stats }) => `${indentString(renderers.stats(stats), 4)}\n\n`,
         printError: (err) => `${indentString(renderers.error(err), 4)}\n\n`,
         /* eslint-enable handle-callback-err, no-unused-vars */
 
@@ -30,11 +30,11 @@ function startReporting(compiler, options) {
 
     const onBegin = () => write(options.printStart());
 
-    const onEnd = (stats) => {
-        write(options.printSuccess(stats));
+    const onEnd = (compilation) => {
+        write(options.printSuccess(compilation));
 
         if (displayStats) {
-            write(options.printStats(stats));
+            write(options.printStats(compilation));
 
             didPrintStats();
         }
