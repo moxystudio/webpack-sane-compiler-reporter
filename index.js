@@ -5,6 +5,7 @@ const wrap = require('lodash.wrap');
 const indentString = require('indent-string');
 
 const renderers = require('./lib/renderers');
+const symbols = require('./lib/symbols');
 
 function startReporting(compiler, options) {
     let displayStats;
@@ -70,3 +71,4 @@ function startReporting(compiler, options) {
 
 module.exports = startReporting;
 module.exports.renderers = renderers;
+module.exports.symbols = symbols;

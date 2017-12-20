@@ -53,13 +53,28 @@ const { stop, options } = startReporting(compiler, {/* options */});
 
 ### Other exports
 
+#### renderers
+
 For convenience this package also exports the [renderers](lib/renderers.js) used internally:
 
 ```js
-const reporter = require('webpack-sane-compiler-reporter');
+const { renderers } = require('webpack-sane-compiler-reporter');
 
 reporter(compiler, {
-    printError: (err) => `${reporter.renderers.renderError(err)}\n`,
+    printError: (err) => `${renderers.renderError(err)}\n`,
+});
+```
+
+
+#### symbols
+
+You can also access the [symbols](lib/symbols.js) that precede some messages.
+
+```js
+const { symbols } = require('webpack-sane-compiler-reporter');
+
+reporter(compiler, {
+    printStart: () => `${symbols.start} A iniciar a compilação...\n`,
 });
 ```
 
