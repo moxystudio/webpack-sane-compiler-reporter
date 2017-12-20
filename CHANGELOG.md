@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="3.2.0"></a>
+# [3.2.0](https://github.com/moxystudio/webpack-sane-compiler-reporter/compare/v3.1.0...v3.2.0) (2017-12-20)
+
+
+### Features
+
+* export the symbols that precede messages ([#10](https://github.com/moxystudio/webpack-sane-compiler-reporter/issues/10)) ([57a3f02](https://github.com/moxystudio/webpack-sane-compiler-reporter/commit/57a3f02))
+
+
+
 <a name="3.1.0"></a>
 # [3.1.0](https://github.com/moxystudio/webpack-sane-compiler-reporter/compare/v3.0.2...v3.1.0) (2017-12-18)
 
