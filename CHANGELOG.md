@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="3.2.2"></a>
+## [3.2.2](https://github.com/moxystudio/webpack-sane-compiler-reporter/compare/v3.2.1...v3.2.2) (2017-12-21)
+
+
+### Bug Fixes
+
+* fix missing indent-string dependency ([0fe0b0d](https://github.com/moxystudio/webpack-sane-compiler-reporter/commit/0fe0b0d))
+
+
+
 <a name="3.2.1"></a>
 ## [3.2.1](https://github.com/moxystudio/webpack-sane-compiler-reporter/compare/v3.2.0...v3.2.1) (2017-12-20)
 
