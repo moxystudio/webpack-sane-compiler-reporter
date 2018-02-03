@@ -17,10 +17,11 @@ function startReporting(compiler, options) {
 
         /* eslint-disable handle-callback-err, no-unused-vars */
         printStart: () => `${renderers.start()}\n`,
-        printSuccess: ({ duration }) => `${renderers.success(duration)}\n\n`,
-        printFailure: (err) => `${renderers.failure()}\n\n`,
-        printStats: ({ stats }) => `${indentString(renderers.stats(stats), 4)}\n\n`,
-        printError: (err) => `${indentString(renderers.error(err), 4)}\n\n`,
+        printSuccess: ({ duration }) => `${renderers.success(duration)}\n`,
+        printFailure: (err) => `${renderers.failure()}\n`,
+        printInvalidate: () => `${renderers.invalidate()}\n`,
+        printStats: ({ stats }) => `\n${indentString(renderers.stats(stats), 4)}\n\n`,
+        printError: (err) => `\n${indentString(renderers.error(err), 4)}\n\n`,
         /* eslint-enable handle-callback-err, no-unused-vars */
 
     }, options);
@@ -46,11 +47,14 @@ function startReporting(compiler, options) {
         write(options.printError(err));
     };
 
+    const onInvalidate = () => write(options.printInvalidate());
+
     const stopReporting = () => {
         compiler
         .removeListener('begin', onBegin)
         .removeListener('end', onEnd)
-        .removeListener('error', onError);
+        .removeListener('error', onError)
+        .removeListener('invalidate', onInvalidate);
     };
 
     resetDisplayStats();
@@ -62,6 +66,7 @@ function startReporting(compiler, options) {
     compiler.on('begin', onBegin);
     compiler.on('end', onEnd);
     compiler.on('error', onError);
+    compiler.on('invalidate', onInvalidate);
 
     return {
         stop: stopReporting,

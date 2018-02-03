@@ -169,13 +169,31 @@ describe('failed build', () => {
     });
 });
 
+describe('invalidated build', () => {
+    it('should render the correct output', () => {
+        const compiler = createCompiler();
+        const writter = createWritter();
+
+        createReporter(compiler, { stats: 'once', write: writter });
+
+        compiler.emit('begin');
+        compiler.emit('invalidate');
+
+        expect(writter.getOutput()).toMatchSnapshot();
+    });
+});
+
 describe('returned object', () => {
     it('should stop reporting if stop is called', () => {
         const compiler = createCompiler();
         const writter = createWritter();
         const compilation = createCompilation();
+        const error = createError();
 
         const { stop } = createReporter(compiler, { write: writter });
+
+        // Listen to the `error` event to prevent the process from crashing
+        compiler.on('error', () => {});
 
         compiler.emit('begin');
         compiler.emit('end', compilation);
@@ -184,6 +202,10 @@ describe('returned object', () => {
 
         compiler.emit('begin');
         compiler.emit('end', compilation);
+        compiler.emit('begin');
+        compiler.emit('error', error);
+        compiler.emit('begin');
+        compiler.emit('invalidate', error);
 
         expect(writter.getOutput()).toMatchSnapshot();
     });
@@ -207,6 +229,7 @@ describe('printers', () => {
             printStart: () => 'start\n',
             printSuccess: () => 'success\n',
             printFailure: () => 'failure\n',
+            printInvalidate: () => 'invalidate\n',
             printStats: () => 'stats\n',
             printError: () => 'err\n',
 
@@ -217,6 +240,8 @@ describe('printers', () => {
         compiler.emit('end', compilation);
         compiler.emit('begin');
         compiler.emit('error', createError('foo'));
+        compiler.emit('begin');
+        compiler.emit('invalidate');
 
         expect(writter.getOutput()).toMatchSnapshot();
     });
@@ -226,7 +251,11 @@ describe('printers', () => {
         const writter = createWritter();
         const compilation = createCompilation();
 
-        const printStart = () => '';
+        const printStart = (...args) => {
+            expect(args.length).toBe(0);
+
+            return '';
+        };
         const printSuccess = ({ stats, duration }) => {
             expect(stats).toHaveProperty('startTime');
             expect(stats).toHaveProperty('endTime');
@@ -239,6 +268,7 @@ describe('printers', () => {
 
             return '';
         };
+        const printInvalidate = printStart;
         const printStats = printSuccess;
         const printError = printFailure;
 
@@ -246,17 +276,20 @@ describe('printers', () => {
             printStart,
             printSuccess,
             printFailure,
+            printInvalidate,
             printStats,
             printError,
 
             write: writter,
         });
 
-        expect.assertions(8);
+        expect.assertions(12);
 
         compiler.emit('begin');
         compiler.emit('end', compilation);
         compiler.emit('begin');
         compiler.emit('error', new Error('foo'));
+        compiler.emit('begin');
+        compiler.emit('invalidate');
     });
 });
