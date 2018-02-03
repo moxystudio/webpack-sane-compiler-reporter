@@ -63,10 +63,11 @@ function startReporting(compiler, options) {
         compiler[method] = wrap(compiler[method], (fn, ...args) => pFinally(fn(...args), resetDisplayStats));
     });
 
-    compiler.on('begin', onBegin);
-    compiler.on('end', onEnd);
-    compiler.on('error', onError);
-    compiler.on('invalidate', onInvalidate);
+    compiler
+    .on('begin', onBegin)
+    .on('end', onEnd)
+    .on('error', onError)
+    .on('invalidate', onInvalidate);
 
     return {
         stop: stopReporting,
