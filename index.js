@@ -10,7 +10,7 @@ const symbols = require('./lib/symbols');
 function startReporting(compiler, options) {
     let displayStats;
 
-    options = Object.assign({
+    options = {
         stats: true,
 
         write: (str) => str && process.stderr.write(str),
@@ -24,7 +24,8 @@ function startReporting(compiler, options) {
         printError: (err) => `\n${indentString(renderers.error(err), 4)}\n\n`,
         /* eslint-enable handle-callback-err, no-unused-vars */
 
-    }, options);
+        ...options,
+    };
 
     const resetDisplayStats = () => (displayStats = options.stats === true || options.stats === 'once');
     const didPrintStats = () => (displayStats = options.stats === 'once' ? false : displayStats);
